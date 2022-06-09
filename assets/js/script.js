@@ -12,6 +12,7 @@ var reportNext = document.querySelector("#report-next");
 var articleDiv = document.getElementById("articles");
 var reportDiv = document.getElementById("reports");
 var menuDiv = document.getElementById("menu");
+// var mainContainer = document.getElementById("mainContainer");
 
 // request info vars
 var type;
@@ -172,6 +173,7 @@ var reportNextPage = function(){
 var showArticles = function(){
     menuDiv.style.display = "none";
     articleDiv.style.display="flex";
+    mainContainer.style.height="200";
     type = "articles";
     requestSpaceInfo(type);
 };

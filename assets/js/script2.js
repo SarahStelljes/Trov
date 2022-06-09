@@ -102,7 +102,7 @@ var articleNextPage = function(){
 var showArticles = function(){
     menuDiv.style.display = "none";
     articleDiv.style.display="flex";
-    mainContainer.style.height="300px";
+    mainContainer.style.height="200px";
     requestSpaceInfo("articles");
 };
 
