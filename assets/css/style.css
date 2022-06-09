@@ -1,0 +1,102 @@
+:root{
+  padding: 0;
+  margin: 0;
+}
+
+#get-news{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#articles{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+#list-articles{
+  list-style: none;
+}
+
+.article-card{
+  background-color: rgb(41, 184, 189);
+  width: 1300px;
+  height: 200px;
+  padding: 5px;
+  display: flex;
+  border: 2px solid black;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+}
+.article-img{
+  height: 195px;
+  width: 195px;
+  margin-right: 5px;
+  object-fit: cover;
+}
+.article-info{
+  width: 1105px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.article-summary{
+  text-align: center;
+}
+
+body{
+  margin:0;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size:18px;
+  color:#242929;
+  
+  
+  
+}
+
+#mainContainer{
+  background-image: url('../images/earth.jpeg');
+  background-size: cover;
+  background-position:center;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 20px;
+}
+
+#mainContainer h1{
+  font-size:60px;
+  line-height:1.2;
+  color: aliceblue;
+}
+
+
+#mainContainer .button{
+  font-size:18px;
+  text-decoration:none;
+  color:#393a92;
+  border:#396a92 1px solid;
+  padding:10px 20px;
+  border-radius:10px;
+  margin-top:20px;
+}
+
+#mainContainer .button:hover{
+  background:#e2c567;
+  color:rgb(255, 255, 255);
+}
+
+header p {
+  
+  font-size: 30px;
+  color: rgb(223, 210, 26);
+  text-shadow: 2px 2px 2px rgb(26, 75, 90);
+  margin-top: 40px;
+}
+
