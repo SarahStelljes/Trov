@@ -9,22 +9,27 @@
 </head>
 <body>
     <header id="mainContainer">
-        <h1>Trov</h1>
-        <div class="outline">
-         <p>Changing Your View On Space</p>
-        </div>
-        <div id="menu">
-            <div id="menu-top">
-                <button id="get-articles" class="button">Get Articles</button>
-                <button id="get-reports" class="button">Get Reports</button>
+        <h1 id="trov-title">Trov</h1>
+        <div id="menu-and-outline-holder">
+            <div class="outline">
+             <p id="outline-p">Changing Your View On Space</p>
             </div>
-            <div id="menu-bottom">
-                <button id="get-blogs" class="button">Get Blogs</button>
+            <div id="look-at-prev">
+                <!-- put option list here? this is for previously looked up articles -->
+            </div>
+            <div id="menu">
+                <div id="menu-top">
+                    <button id="get-articles" class="button menu-btn">Get Articles</button>
+                    <button id="get-reports" class="button menu-btn">Get Reports</button>
+                </div>
+                <div id="menu-bottom">
+                    <button id="get-blogs" class="button menu-btn">Get Blogs</button>
+                </div>
             </div>
         </div>
     </header>
     <main>
-        <div id="articles">
+        <section id="articles">
             <div id="div-list-articles">
                 <ul id="list-articles">
                 </ul>
@@ -33,8 +38,8 @@
                 <button id="article-prev" class="previous-article-list">Previous</button>
                 <button id="article-next" class="next-article-list">Next</button>
             </div>
-        </div>
-        <div id="reports">
+        </section>
+        <section id="reports">
             <div id="div-list-reports">
                 <ul id="list-reports">
                 </ul>
@@ -43,8 +48,8 @@
                 <button id="report-prev" class="previous-report-list">Previous</button>
                 <button id="report-next" class="next-report-list">Next</button>
             </div>
-        </div>
-        <div id="blogs">
+        </section>
+        <section id="blogs">
             <div id="div-list-blogs">
                 <ul id="list-blogs">
                 </ul>
@@ -53,7 +58,7 @@
                 <button id="blog-prev" class="previous-blog-list">Previous</button>
                 <button id="blog-next" class="next-blog-list">Next</button>
             </div>
-        </div>
+        </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>

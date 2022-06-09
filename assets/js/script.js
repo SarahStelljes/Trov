@@ -17,7 +17,6 @@ var blogNext = document.querySelector("#blog-next");
 var articleDiv = document.getElementById("articles");
 var reportDiv = document.getElementById("reports");
 var blogDiv = document.getElementById("blogs");
-var menuDiv = document.getElementById("menu");
 
 // request info vars
 var type;
@@ -49,6 +48,7 @@ var requestSpaceInfo = function(infoType){
     fetch(requestUrl)
     .then((res) => res.json())
         .then(function(data){
+            console.log(data);
             // if infoType equals "articles"...
             if(infoType === "articles"){
                 for(var i = 0; i < data.length; i++){
@@ -78,18 +78,32 @@ var requestSpaceInfo = function(infoType){
                     articleTitle.textContent=object.title;
                     articleInfo.appendChild(articleTitle);
                     
-                    // create article site and attach to article div info
-                    var articleSite = document.createElement("h4");
-                    articleSite.classList="article-news-site";
-                    articleSite.textContent="By: "+object.newsSite;
-                    articleInfo.appendChild(articleSite);
                     
                     // create article summary and attach to article info div
                     var articleSum = document.createElement("p");
                     articleSum.className="article-summary";
                     articleSum.textContent=object.summary;
                     articleInfo.appendChild(articleSum);
-            
+
+                    // create published-info div
+                    var pubDiv = document.createElement("div");
+                    pubDiv.className = "published-info";
+                    
+                    // create article site and attach to article div info
+                    var articleSite = document.createElement("h4");
+                    articleSite.className="article-news-site";
+                    articleSite.textContent="By: "+object.newsSite;
+                    pubDiv.appendChild(articleSite);
+
+                    // published on
+                    var pubOn = document.createElement("h4");
+                    pubOn.className ="published-on";
+                    pubOn.textContent="Published On: "+object.publishedAt;
+                    pubDiv.appendChild(pubOn);
+                    
+                    // pub div attach to article card
+                    articleInfo.appendChild(pubDiv);
+
                     // attach article card to article list
                     articleList.appendChild(articleCard);
                 }
@@ -121,19 +135,32 @@ var requestSpaceInfo = function(infoType){
                     reportTitle.className="report-title";
                     reportTitle.textContent=object.title;
                     reportInfo.appendChild(reportTitle);
-                    
-                    // create report site and attach to report div info
-                    var reportSite = document.createElement("h4");
-                    reportSite.classList="report-news-site";
-                    reportSite.textContent="By: "+object.newsSite;
-                    reportInfo.appendChild(reportSite);
-                    
+                                        
                     // create report summary and attach to report info div
                     var reportSum = document.createElement("p");
                     reportSum.className="report-summary";
                     reportSum.textContent=object.summary;
                     reportInfo.appendChild(reportSum);
+
+                    // create published-info div
+                    var pubDiv = document.createElement("div");
+                    pubDiv.className = "published-info";
+                    
+                    // create report site and attach to report div info
+                    var reportSite = document.createElement("h4");
+                    reportSite.className="report-news-site";
+                    reportSite.textContent="By: "+object.newsSite;
+                    pubDiv.appendChild(reportSite);
+
+                    // published on
+                    var pubOn = document.createElement("h4");
+                    pubOn.className ="published-on";
+                    pubOn.textContent="Published On: "+object.publishedAt;
+                    pubDiv.appendChild(pubOn);
             
+                    // pub div attach to report card
+                    reportInfo.appendChild(pubDiv);
+
                     // attach report card to report list
                     reportList.appendChild(reportCard);
                 }
@@ -165,19 +192,32 @@ var requestSpaceInfo = function(infoType){
                     blogTitle.className="blog-title";
                     blogTitle.textContent=object.title;
                     blogInfo.appendChild(blogTitle);
-                    
-                    // create blog site and attach to blog div info
-                    var blogSite = document.createElement("h4");
-                    blogSite.classList="blog-news-site";
-                    blogSite.textContent="By: "+object.newsSite;
-                    blogInfo.appendChild(blogSite);
-                    
+                                        
                     // create blog summary and attach to blog info div
                     var blogSum = document.createElement("p");
                     blogSum.className="blog-summary";
                     blogSum.textContent=object.summary;
                     blogInfo.appendChild(blogSum);
+
+                    // create published-info div
+                    var pubDiv = document.createElement("div");
+                    pubDiv.className = "published-info";
+                    
+                    // create blog site and attach to blog div info
+                    var blogSite = document.createElement("h4");
+                    blogSite.className="blog-news-site";
+                    blogSite.textContent="By: "+object.newsSite;
+                    pubDiv.appendChild(blogSite);
+
+                    // published on
+                    var pubOn = document.createElement("h4");
+                    pubOn.className ="published-on";
+                    pubOn.textContent="Published On: "+object.publishedAt;
+                    pubDiv.appendChild(pubOn);
             
+                    // pub div attach to blog card
+                    blogInfo.appendChild(pubDiv);
+
                     // attach blog card to blog list
                     blogList.appendChild(blogCard);
                 }
@@ -237,30 +277,51 @@ var blogNextPage = function(){
     requestSpaceInfo(type);
 };
 
+//// SHOW SECTIONS
 // function to show articles
 var showArticles = function(){
-    menuDiv.style.display = "none";
+    changeHeaderStyle();
     articleDiv.style.display="flex";
-    mainContainer.style.height="200px";
     type = "articles";
     requestSpaceInfo(type);
 };
 //function to show reports
 var showReports = function(){
-    menuDiv.style.display = "none";
+    changeHeaderStyle();
     reportDiv.style.display="flex";
-    mainContainer.style.height="200px";
     type = "reports";
     requestSpaceInfo(type);
 };
 //function to show blogs
 var showBlogs = function(){
-    menuDiv.style.display = "none";
+    changeHeaderStyle();
     blogDiv.style.display="flex";
-    mainContainer.style.height="200px";
     type = "blogs";
     requestSpaceInfo(type);
 };
+
+// change header style function
+var changeHeaderStyle = function(){
+    var menuDiv = document.getElementById("menu");
+    var menuOutHolder = document.getElementById("menu-and-outline-holder");
+    var trovTitle = document.getElementById("trov-title");
+    var artBtn = document.getElementById("get-articles");
+    var repBtn = document.getElementById("get-reports");
+    var blgBtn = document.getElementById("get-blogs");
+    var outP = document.getElementById("outline-p");
+    var menuBottom = document.getElementById("menu-bottom");
+
+    mainContainer.style.height = "200px";
+    menuDiv.style.flexDirection = "row";
+    artBtn.style.marginTop="1px";
+    repBtn.style.marginTop="1px";
+    blgBtn.style.marginTop="1px";
+    outP.style.margin="5px";
+    menuOutHolder.style.flexDirection="column-reverse";
+    trovTitle.style.margin = "10px 0";
+    trovTitle.style.fontSize = "32px";
+    menuBottom.style.marginLeft = "4px";
+}
 
 // article button event listeners
 articleBtn.addEventListener("click", showArticles);
