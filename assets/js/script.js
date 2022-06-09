@@ -22,18 +22,22 @@ var blogDiv = document.getElementById("blogs");
 var type;
 var resultLimit = 10;
 var pageReq = 0;
-var searchForm = document.querySelector("#search-form");
+var searchBtn = document.querySelector("#search-btn");
+var searchInput = document.querySelector("#search-news");
 var searchThis;
-var requestSearch;
+var requestSearch="";
 var previousSearches = [];
+var savedSearches = [];
 
 // list types
 var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
 var blogList = document.querySelector("#list-blogs");
 
+// request url
+var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
+
 var requestSpaceInfo = function(infoType){
-    var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?_start='+pageReq+'&_limit='+resultLimit;
 
     // disable prev button if page req is 0
     if(pageReq === 0){
@@ -58,10 +62,17 @@ var requestSpaceInfo = function(infoType){
                     // stringify data
                     var object = JSON.stringify(data[i]);
                     object = JSON.parse(object)
-            
+                    
+                    if(previousSearches.length > 0){
+                        previousSearches.push(object.map(news => {
+                            return {title: news.title, summary: news.summary};
+                        }));
+                    }
+
                     // create article card
                     var articleCard = document.createElement("div");
-                    articleCard.className="article-card";
+                    articleCard.className="article-card card";
+                    articleCard.setAttribute("url", data[i].url);
                     articleCard.id="article-"+object.id;
 
                     // create article image and attach it to article card
@@ -119,7 +130,8 @@ var requestSpaceInfo = function(infoType){
             
                     // create report card
                     var reportCard = document.createElement("div");
-                    reportCard.className="report-card";
+                    reportCard.className="report-card card";
+                    reportCard.setAttribute("url", data[i].url);
                     reportCard.id="report-"+object.id;
 
                     // create report image and attach it to report card
@@ -176,7 +188,8 @@ var requestSpaceInfo = function(infoType){
             
                     // create blog card
                     var blogCard = document.createElement("div");
-                    blogCard.className="blog-card";
+                    blogCard.className="blog-card card";
+                    blogCard.setAttribute("url", data[i].url);
                     blogCard.id="blog-"+object.id;
 
                     // create blog image and attach it to blog card
@@ -286,6 +299,18 @@ var showArticles = function(){
     type = "articles";
     changeHeaderStyle(type);
     articleDiv.style.display="flex";
+    // if reportList has children
+    if(reportList.hasChildNodes()){
+        while(reportList.firstChild){
+            reportList.removeChild(reportList.firstChild);
+        }
+    }
+    // if blogList has children
+    if(blogList.hasChildNodes()){
+        while(blogList.firstChild){
+            blogList.removeChild(blogList.firstChild);
+        }
+    }
     requestSpaceInfo(type);
 };
 //function to show reports
@@ -293,6 +318,18 @@ var showReports = function(){
     type = "reports";
     changeHeaderStyle(type);
     reportDiv.style.display="flex";
+    // if articleList has children
+    if(articleList.hasChildNodes()){
+        while(articleList.firstChild){
+            articleList.removeChild(articleList.firstChild);
+        }
+    }
+    // if blogList has children
+    if(blogList.hasChildNodes()){
+        while(blogList.firstChild){
+            blogList.removeChild(blogList.firstChild);
+        }
+    }
     requestSpaceInfo(type);
 };
 //function to show blogs
@@ -300,6 +337,18 @@ var showBlogs = function(){
     type = "blogs";
     changeHeaderStyle(type);
     blogDiv.style.display="flex";
+    // if articleList has children
+    if(articleList.hasChildNodes()){
+        while(articleList.firstChild){
+            articleList.removeChild(articleList.firstChild);
+        }
+    }
+    // if reportList has children
+    if(reportList.hasChildNodes()){
+        while(reportList.firstChild){
+            reportList.removeChild(reportList.firstChild);
+        }
+    }
     requestSpaceInfo(type);
 };
 
@@ -327,10 +376,27 @@ var changeHeaderStyle = function(infoType){
     searchDiv.style.display="flex";
     searchLbl.textContent="Search "+infoType+": ";
 }
-var searchFor = function(event){
-    event.preventDefault();
-    if()
+var searchFor = function(){
+    requestSearch = "id_contains="+searchThis;
 };
+
+// $(".card", function(){
+//     var cardType = $(this)
+//         .attr("id")
+//         .split("-")[0];
+//     return cardType;
+// })
+//     .children(cardType+"-info")
+//     .children("h3")
+//     .on("click", function(){
+//         // create object to push
+//         var openedNews = {
+//             url: $(requestUrl)
+//                 .split("?")[0],
+//             newsType: $(this)
+                
+//         };
+//     });
 // article button event listeners
 articleBtn.addEventListener("click", showArticles);
 articlePrev.addEventListener("click", articlePrevPage);
@@ -341,11 +407,12 @@ reportBtn.addEventListener("click", showReports);
 reportPrev.addEventListener("click", reportPrevPage);
 reportNext.addEventListener("click", reportNextPage);
 
-// blog button event listenrs
+// blog button event listeners
 blogBtn.addEventListener("click", showBlogs);
 blogPrev.addEventListener("click", blogPrevPage);
 blogNext.addEventListener("click", blogNextPage);
 
 
 // other event listners
-searchForm.addEventListener("submit", searchFor);
+searchBtn.addEventListener("click", searchFor);
+searchInput.addEventListener("ipnut")
