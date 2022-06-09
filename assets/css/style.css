@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
 }
-#articles, #reports{
+#articles, #reports, #blogs{
   display: none;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
   list-style: none;
 }
 
-.article-card, .report-card{
+.article-card, .report-card, .blog-card{
   background-color: rgb(41, 184, 189);
   width: 1300px;
   height: 200px;
@@ -30,20 +30,20 @@
   align-items: center;
   margin: 5px;
 }
-.article-img, .report-img{
+.article-img, .report-img, .blog-img{
   height: 195px;
   width: 195px;
   margin-right: 5px;
   object-fit: cover;
 }
-.article-info, .report-info{
+.article-info, .report-info, .blog-info{
   width: 1105px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.article-summary, .report-summary{
+.article-summary, .report-summary, .blog-summary{
   text-align: center;
 }
 

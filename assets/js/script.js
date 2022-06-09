@@ -8,11 +8,16 @@ var reportBtn = document.querySelector("#get-reports");
 var reportPrev = document.querySelector("#report-prev");
 var reportNext = document.querySelector("#report-next");
 
+// blog button vars
+var blogBtn = document.querySelector("#get-blogs");
+var blogPrev = document.querySelector("#blog-prev");
+var blogNext = document.querySelector("#blog-next");
+
 // important div vars
 var articleDiv = document.getElementById("articles");
 var reportDiv = document.getElementById("reports");
+var blogDiv = document.getElementById("blogs");
 var menuDiv = document.getElementById("menu");
-// var mainContainer = document.getElementById("mainContainer");
 
 // request info vars
 var type;
@@ -23,6 +28,7 @@ var pageReq = 0;
 
 var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
+var blogList = document.querySelector("#list-blogs");
 
 var requestSpaceInfo = function(infoType){
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?_start='+pageReq+'&_limit='+resultLimit;
@@ -30,16 +36,18 @@ var requestSpaceInfo = function(infoType){
     // disable prev button if page req is 0
     if(pageReq === 0){
         articlePrev.disabled=true;
+        reportPrev.disabled=true;
+        blogPrev.disabled=true;
     }
     else{
         articlePrev.disabled=false;
+        reportPrev.disabled=false;
+        blogPrev.disabled=false;
     }
     
     // fetch spaceflight news
     fetch(requestUrl)
-        .then(function(response){
-            return response.json();
-        })
+    .then((res) => res.json())
         .then(function(data){
             // if infoType equals "articles"...
             if(infoType === "articles"){
@@ -87,7 +95,6 @@ var requestSpaceInfo = function(infoType){
                 }
             }
             if(infoType === "reports"){
-                
                 for(var i = 0; i < data.length; i++){
                     // stringify data
                     var object = JSON.stringify(data[i]);
@@ -131,6 +138,50 @@ var requestSpaceInfo = function(infoType){
                     reportList.appendChild(reportCard);
                 }
             }
+            if(infoType === "blogs"){
+                for(var i = 0; i < data.length; i++){
+                    // stringify data
+                    var object = JSON.stringify(data[i]);
+                    object = JSON.parse(object)
+            
+                    // create blog card
+                    var blogCard = document.createElement("div");
+                    blogCard.className="blog-card";
+                    blogCard.id="blog-"+object.id;
+
+                    // create blog image and attach it to blog card
+                    var blogImg = document.createElement("img");
+                    blogImg.className="blog-img";
+                    blogImg.src = object.imageUrl;
+                    blogCard.appendChild(blogImg);
+                    
+                    // create blog info div and attach to blog card
+                    var blogInfo = document.createElement("div");
+                    blogInfo.className="blog-info";
+                    blogCard.appendChild(blogInfo);
+                    
+                    // create blog title and attach it to blog info div
+                    var blogTitle = document.createElement("h3");
+                    blogTitle.className="blog-title";
+                    blogTitle.textContent=object.title;
+                    blogInfo.appendChild(blogTitle);
+                    
+                    // create blog site and attach to blog div info
+                    var blogSite = document.createElement("h4");
+                    blogSite.classList="blog-news-site";
+                    blogSite.textContent="By: "+object.newsSite;
+                    blogInfo.appendChild(blogSite);
+                    
+                    // create blog summary and attach to blog info div
+                    var blogSum = document.createElement("p");
+                    blogSum.className="blog-summary";
+                    blogSum.textContent=object.summary;
+                    blogInfo.appendChild(blogSum);
+            
+                    // attach blog card to blog list
+                    blogList.appendChild(blogCard);
+                }
+            }
         });
 };
 
@@ -151,6 +202,15 @@ var reportPrevPage = function(){
     }
     requestSpaceInfo(type);
 }
+// function to get previous blog page
+var blogPrevPage = function(){
+    pageReq = pageReq - resultLimit;
+    while(blogList.firstChild){
+        blogList.removeChild(blogList.firstChild);
+    }
+    requestSpaceInfo(type);
+}
+
 //// NEXT BUTTONS
 // function to get next article page
 var articleNextPage = function(){
@@ -168,12 +228,20 @@ var reportNextPage = function(){
     }
     requestSpaceInfo(type);
 };
+// function to get next blog page
+var blogNextPage = function(){
+    pageReq = pageReq + resultLimit;
+    while(blogList.firstChild){
+        blogList.removeChild(blogList.firstChild);
+    }
+    requestSpaceInfo(type);
+};
 
 // function to show articles
 var showArticles = function(){
     menuDiv.style.display = "none";
     articleDiv.style.display="flex";
-    mainContainer.style.height="200";
+    mainContainer.style.height="200px";
     type = "articles";
     requestSpaceInfo(type);
 };
@@ -181,7 +249,16 @@ var showArticles = function(){
 var showReports = function(){
     menuDiv.style.display = "none";
     reportDiv.style.display="flex";
+    mainContainer.style.height="200px";
     type = "reports";
+    requestSpaceInfo(type);
+};
+//function to show blogs
+var showBlogs = function(){
+    menuDiv.style.display = "none";
+    blogDiv.style.display="flex";
+    mainContainer.style.height="200px";
+    type = "blogs";
     requestSpaceInfo(type);
 };
 
@@ -194,3 +271,8 @@ articleNext.addEventListener("click", articleNextPage);
 reportBtn.addEventListener("click", showReports);
 reportPrev.addEventListener("click", reportPrevPage);
 reportNext.addEventListener("click", reportNextPage);
+
+// blog button event listeenrs
+blogBtn.addEventListener("click", showBlogs);
+blogPrev.addEventListener("click", blogPrevPage);
+blogNext.addEventListener("click", blogNextPage);
