@@ -22,9 +22,12 @@ var blogDiv = document.getElementById("blogs");
 var type;
 var resultLimit = 10;
 var pageReq = 0;
+var searchForm = document.querySelector("#search-form");
+var searchThis;
+var requestSearch;
+var previousSearches = [];
 
-// summary_contains=launch&
-
+// list types
 var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
 var blogList = document.querySelector("#list-blogs");
@@ -280,36 +283,37 @@ var blogNextPage = function(){
 //// SHOW SECTIONS
 // function to show articles
 var showArticles = function(){
-    changeHeaderStyle();
-    articleDiv.style.display="flex";
     type = "articles";
+    changeHeaderStyle(type);
+    articleDiv.style.display="flex";
     requestSpaceInfo(type);
 };
 //function to show reports
 var showReports = function(){
-    changeHeaderStyle();
-    reportDiv.style.display="flex";
     type = "reports";
+    changeHeaderStyle(type);
+    reportDiv.style.display="flex";
     requestSpaceInfo(type);
 };
 //function to show blogs
 var showBlogs = function(){
-    changeHeaderStyle();
-    blogDiv.style.display="flex";
     type = "blogs";
+    changeHeaderStyle(type);
+    blogDiv.style.display="flex";
     requestSpaceInfo(type);
 };
 
 // change header style function
-var changeHeaderStyle = function(){
+var changeHeaderStyle = function(infoType){
     var menuDiv = document.getElementById("menu");
-    var menuOutHolder = document.getElementById("menu-and-outline-holder");
+    var searchDiv = document.getElementById("search-div");
     var trovTitle = document.getElementById("trov-title");
     var artBtn = document.getElementById("get-articles");
     var repBtn = document.getElementById("get-reports");
     var blgBtn = document.getElementById("get-blogs");
     var outP = document.getElementById("outline-p");
     var menuBottom = document.getElementById("menu-bottom");
+    var searchLbl = document.getElementById("search-label");
 
     mainContainer.style.height = "200px";
     menuDiv.style.flexDirection = "row";
@@ -317,12 +321,16 @@ var changeHeaderStyle = function(){
     repBtn.style.marginTop="1px";
     blgBtn.style.marginTop="1px";
     outP.style.margin="5px";
-    menuOutHolder.style.flexDirection="column-reverse";
     trovTitle.style.margin = "10px 0";
     trovTitle.style.fontSize = "32px";
     menuBottom.style.marginLeft = "4px";
+    searchDiv.style.display="flex";
+    searchLbl.textContent="Search "+infoType+": ";
 }
-
+var searchFor = function(event){
+    event.preventDefault();
+    if()
+};
 // article button event listeners
 articleBtn.addEventListener("click", showArticles);
 articlePrev.addEventListener("click", articlePrevPage);
@@ -333,7 +341,11 @@ reportBtn.addEventListener("click", showReports);
 reportPrev.addEventListener("click", reportPrevPage);
 reportNext.addEventListener("click", reportNextPage);
 
-// blog button event listeenrs
+// blog button event listenrs
 blogBtn.addEventListener("click", showBlogs);
 blogPrev.addEventListener("click", blogPrevPage);
 blogNext.addEventListener("click", blogNextPage);
+
+
+// other event listners
+searchForm.addEventListener("submit", searchFor);
