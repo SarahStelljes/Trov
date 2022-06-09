@@ -28,7 +28,7 @@
   border: 2px solid black;
   justify-content: space-between;
   align-items: center;
-  margin: 20px;
+  margin: 5px;
 }
 .article-img{
   height: 195px;
@@ -92,4 +92,11 @@ body{
   color:rgb(255, 255, 255);
 }
 
+header p {
+  
+  font-size: 30px;
+  color: rgb(223, 210, 26);
+  text-shadow: 2px 2px 2px rgb(26, 75, 90);
+  margin-top: 40px;
+}
 
