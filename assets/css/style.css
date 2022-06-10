@@ -115,8 +115,11 @@ body{
   display: flex;
 }
 
-#search-div{
+#search-div, #search-form{
   display: none;
   justify-content: center;
   align-items: center;
+}
+#search-form{
+  display: flex;
 }

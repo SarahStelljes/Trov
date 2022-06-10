@@ -317,6 +317,8 @@ var showArticles = function(){
     type = "articles";
     changeHeaderStyle(type);
     articleDiv.style.display="flex";
+    reportDiv.style.display="none";
+    blogDiv.style.display="none";
     // if reportList has children
     if(reportList.hasChildNodes()){
         while(reportList.firstChild){
@@ -336,6 +338,8 @@ var showReports = function(){
     type = "reports";
     changeHeaderStyle(type);
     reportDiv.style.display="flex";
+    blogDiv.style.display="none";
+    articleDiv.style.display="none";
     // if articleList has children
     if(articleList.hasChildNodes()){
         while(articleList.firstChild){
@@ -355,6 +359,8 @@ var showBlogs = function(){
     type = "blogs";
     changeHeaderStyle(type);
     blogDiv.style.display="flex";
+    articleDiv.style.display="none";
+    reportDiv.style.display="none";
     // if articleList has children
     if(articleList.hasChildNodes()){
         while(articleList.firstChild){
@@ -372,6 +378,7 @@ var showBlogs = function(){
 
 // change header style function
 var changeHeaderStyle = function(infoType){
+    var mainContainer = document.getElementById("mainContainer");
     var menuDiv = document.getElementById("menu");
     var searchDiv = document.getElementById("search-div");
     var trovTitle = document.getElementById("trov-title");
@@ -382,6 +389,8 @@ var changeHeaderStyle = function(infoType){
     var menuBottom = document.getElementById("menu-bottom");
     var searchLbl = document.getElementById("search-label");
 
+    mainContainer.style.transitionProperty = "height";
+    mainContainer.style.transitionDuration = "1s";
     mainContainer.style.height = "300px";
     menuDiv.style.flexDirection = "row";
     artBtn.style.marginTop="1px";
@@ -407,13 +416,11 @@ var searchFor = function(event){
 var saveSearch = function(searchThis){
     if(previousSearches.length < 5){
         previousSearches.push(searchThis);
-        for(var e = previousSearches.length; e > savedSearches.length; e--){
-            e = e-1;
-            savedSearches.push(previousSearches[e]);
-        }
+        previousSearches = previousSearches.reverse()
         console.log(savedSearches);
     }
     else{
+        savedSearches.pop();
 
     }
 
