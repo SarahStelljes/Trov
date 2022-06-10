@@ -27,7 +27,18 @@ var searchInput = document.querySelector("#search-news");
 var searchThis;
 var requestSearch="";
 var previousSearches = [];
-var savedSearches = [];
+
+// Fills array with local storage or gives empty array.
+var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
+savedSearches.forEach(function(menuItem){
+    console.log(menuItem);
+    var li = $('<li>');
+    var aTag = $('<a>').attr('value', menuItem);
+    console.log(li, aTag);
+}) 
+// // // Dropdown initialization for search bar
+//Append these into the dropdown.
+// $('.dropdown-trigger').dropdown();
 
 // list types
 var articleList = document.querySelector("#list-articles");
@@ -406,12 +417,25 @@ var changeHeaderStyle = function(infoType){
 var searchFor = function(event){
     event.preventDefault();
     searchThis = searchInput.value;
+    if (searchThis === '') {
+        // alert('No Empty Searches');
+        return;
+    }
+    // indexOf checks to see if it's in the array
+    if (savedSearches.indexOf(searchThis) === -1) {
+        // unshift determines reverse order for the array
+        savedSearches.unshift(searchThis);
+        localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
+    }
+    
+    console.log(savedSearches);
     requestSearch = "title_contains="+searchThis+"&";
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
     fetch(requestUrl).then((res) => res.json()).then(function(data){
         console.log(data);
         saveSearch(searchThis);
     });
+
 };
 var saveSearch = function(searchThis){
     if(previousSearches.length < 5){
@@ -471,3 +495,7 @@ blogNext.addEventListener("click", blogNextPage);
 // other event listners
 searchBtn.addEventListener("click", searchFor);
 // searchInput.addEventListener("input");
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    // var instances = M.Dropdown.init(searchThis, searchThis);
+  });
