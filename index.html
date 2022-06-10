@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Adding Materialize for drop down menu-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="assets/css/style.css"/>
     <title>Trov</title>¬ø
 </head>
@@ -27,7 +29,8 @@
                 <form autocomplete="off" id="search-form">
                     <label id="search-label" for="search"></label>
                     <div id="search-input-div">
-                        <input type="search" id="search-news" name="search"/>
+                        <input type="search" class ="dropdown-trigger" id="search-news" name="search"/>
+                        <ul id="dropdown" class="dropdown-content"></ul>
                     </div>
                     <button id="search-btn" type="submit">Submit</button>
                 </form>
@@ -67,6 +70,8 @@
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!--Adding Materialize script for drop down menu-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

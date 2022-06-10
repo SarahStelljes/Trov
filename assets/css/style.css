@@ -26,6 +26,14 @@
   list-style: none;
 }
 
+.article-title {
+  font-size: 2rem;
+}
+
+.published-info h4 {
+  font-size: 24px;
+}
+
 .article-card, .report-card, .blog-card{
   background-color: rgb(41, 184, 189);
   width: 1300px;
@@ -119,4 +127,12 @@ body{
   display: none;
   justify-content: center;
   align-items: center;
+}
+
+#search-input-div {
+  background-color: white;
+}
+
+#articles {
+  margin-top: 25px;
 }
