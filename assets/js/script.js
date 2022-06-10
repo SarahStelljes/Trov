@@ -245,8 +245,6 @@ var requestRandomSpaceImg = function(){
     fetch(imgRequestUrl)
         .then((res) => res.json())
         .then(function(data){
-            console.log("url: " + data.url);
-            console.log(data.hdurl);
             var mainContainer = document.getElementById("mainContainer");
             mainContainer.style.backgroundImage = "url("+data.hdurl+")";
         });
@@ -388,17 +386,29 @@ var changeHeaderStyle = function(infoType){
     searchLbl.textContent="Search "+infoType+": ";
 }
 var searchFor = function(event){
-    
     event.preventDefault();
     searchThis = searchInput.value;
     requestSearch = "title_contains="+searchThis+"&";
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
-    console.log(requestUrl);
     fetch(requestUrl).then((res) => res.json()).then(function(data){
         console.log(data);
+        saveSearch(searchThis);
     });
 };
+var saveSearch = function(searchThis){
+    if(previousSearches.length < 5){
+        previousSearches.push(searchThis);
+        for(var e = previousSearches.length; e > savedSearches.length; e--){
+            e = e-1;
+            savedSearches.push(previousSearches[e]);
+        }
+        console.log(savedSearches);
+    }
+    else{
 
+    }
+
+}
 // $(".card", function(){
 //     var cardType = $(this)
 //         .attr("id")
