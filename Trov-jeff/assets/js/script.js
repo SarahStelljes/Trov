@@ -34,11 +34,8 @@ var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
 var blogList = document.querySelector("#list-blogs");
 
-// request url
-var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
-
 var requestSpaceInfo = function(infoType){
-
+    var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
     // disable prev button if page req is 0
     if(pageReq === 0){
         articlePrev.disabled=true;
@@ -376,8 +373,16 @@ var changeHeaderStyle = function(infoType){
     searchDiv.style.display="flex";
     searchLbl.textContent="Search "+infoType+": ";
 }
-var searchFor = function(){
-    requestSearch = "id_contains="+searchThis;
+var searchFor = function(event){
+    
+    event.preventDefault();
+    searchThis = searchInput.value;
+    requestSearch = "title_contains="+searchThis+"&";
+    var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
+    console.log(requestUrl);
+    fetch(requestUrl).then((res) => res.json()).then(function(data){
+        console.log(data);
+    });
 };
 
 // $(".card", function(){
@@ -415,4 +420,4 @@ blogNext.addEventListener("click", blogNextPage);
 
 // other event listners
 searchBtn.addEventListener("click", searchFor);
-searchInput.addEventListener("ipnut")
+// searchInput.addEventListener("input");
