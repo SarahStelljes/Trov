@@ -34,8 +34,6 @@ var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
 var blogList = document.querySelector("#list-blogs");
 
-// request urls
-var imgRequestUrl = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
 
 var requestSpaceInfo = function(infoType){
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
@@ -55,7 +53,6 @@ var requestSpaceInfo = function(infoType){
     fetch(requestUrl)
     .then((res) => res.json())
         .then(function(data){
-            console.log(data);
             // if infoType equals "articles"...
             if(infoType === "articles"){
                 for(var i = 0; i < data.length; i++){
@@ -241,13 +238,24 @@ var requestSpaceInfo = function(infoType){
         });
 };
 
-var requestRandomSpaceImg = function(){
+var requestDailySpaceImg = function(){
+    // request urls
+    var imgRequestUrl = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+    var mainContainer = document.getElementById("mainContainer");
     fetch(imgRequestUrl)
-        .then((res) => res.json())
+        .then(function(res){
+            if(!res.ok){
+                throw Error(res.statusText + " - "+ res.url);
+            }
+            return res.json();
+        })
         .then(function(data){
-            console.log(data);
-            var mainContainer = document.getElementById("mainContainer");
-            mainContainer.style.backgroundImage = "url("+data.hdurl+")";
+            var object = JSON.stringify(data);
+            mainContainer.style.backgroundImage = "url("+data.url+")";
+        })
+        .catch(function(err){
+            console.log(err);
+            mainContainer.style.backgroundImage = "url('./assets/images/earth.jpeg')";
         });
 };
 
@@ -432,10 +440,11 @@ var checkTime = function(){
     requestRandomSpaceImg();
 };
 
-///////////// Make sure to unmark these two when you get look at it to see if it works. And I made it to refresh every two hours on purpose. That way at least 3 people can have it open and it still work without it going over the limit.
-// requestRandomSpaceImg();
+// request daily space img on load
+requestDailySpaceImg();
 
-// setInterval(checkTime, (1000 * 60) * 120);
+// interval for checking to see 
+setInterval(requestDailySpaceImg, (1000 * 60) * 120);
 
 articleBtn.addEventListener("click", showArticles);
 articlePrev.addEventListener("click", articlePrevPage);
