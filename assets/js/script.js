@@ -245,6 +245,7 @@ var requestRandomSpaceImg = function(){
     fetch(imgRequestUrl)
         .then((res) => res.json())
         .then(function(data){
+            console.log(data);
             var mainContainer = document.getElementById("mainContainer");
             mainContainer.style.backgroundImage = "url("+data.hdurl+")";
         });
@@ -427,8 +428,14 @@ var saveSearch = function(searchThis){
 //         };
 //     });
 // article button event listeners
+var checkTime = function(){
+    requestRandomSpaceImg();
+};
 
-requestRandomSpaceImg();
+///////////// Make sure to unmark these two when you get look at it to see if it works. And I made it to refresh every two hours on purpose. That way at least 3 people can have it open and it still work without it going over the limit.
+// requestRandomSpaceImg();
+
+// setInterval(checkTime, (1000 * 60) * 120);
 
 articleBtn.addEventListener("click", showArticles);
 articlePrev.addEventListener("click", articlePrevPage);
