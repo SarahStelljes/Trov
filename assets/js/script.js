@@ -34,8 +34,9 @@ var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
 var blogList = document.querySelector("#list-blogs");
 
-// request url
+// request urls
 var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
+var imgRequestUrl = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
 
 var requestSpaceInfo = function(infoType){
 
@@ -241,6 +242,17 @@ var requestSpaceInfo = function(infoType){
         });
 };
 
+var requestRandomSpaceImg = function(){
+    fetch(imgRequestUrl)
+        .then((res) => res.json())
+        .then(function(data){
+            console.log("url: " + data.url);
+            console.log(data.hdurl);
+            var mainContainer = document.getElementById("mainContainer");
+            mainContainer.style.backgroundImage = "url("+data.hdurl+")";
+        });
+};
+
 //// PREVIOUS BUTTONS
 // function to get previous article page
 var articlePrevPage = function(){
@@ -364,7 +376,7 @@ var changeHeaderStyle = function(infoType){
     var menuBottom = document.getElementById("menu-bottom");
     var searchLbl = document.getElementById("search-label");
 
-    mainContainer.style.height = "200px";
+    mainContainer.style.height = "300px";
     menuDiv.style.flexDirection = "row";
     artBtn.style.marginTop="1px";
     repBtn.style.marginTop="1px";
@@ -398,6 +410,9 @@ var searchFor = function(){
 //         };
 //     });
 // article button event listeners
+
+requestRandomSpaceImg();
+
 articleBtn.addEventListener("click", showArticles);
 articlePrev.addEventListener("click", articlePrevPage);
 articleNext.addEventListener("click", articleNextPage);
@@ -414,5 +429,5 @@ blogNext.addEventListener("click", blogNextPage);
 
 
 // other event listners
-searchBtn.addEventListener("click", searchFor);
-searchInput.addEventListener("ipnut")
+// searchBtn.addEventListener("click", searchFor);
+// searchInput.addEventListener("ipnut")

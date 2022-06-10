@@ -65,7 +65,7 @@ body{
 }
 
 #mainContainer{
-  background-image: url('../images/earth.jpeg');
+  background-image: /*url('../images/earth.jpeg')*/;
   background-size: cover;
   background-position:center;
   height:100vh;
