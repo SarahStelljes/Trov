@@ -4,10 +4,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trov</title>
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <title>Trov</title>¬ø
 </head>
 <body>
+    <header id="mainContainer">
+        <h1 id="trov-title">Trov</h1>
+        <div id="menu-and-outline-holder">
+            <div class="outline">
+             <p id="outline-p">Changing Your View On Space</p>
+            </div>
+            <div id="menu">
+                <div id="menu-top">
+                    <button id="get-articles" class="button menu-btn">Get Articles</button>
+                    <button id="get-reports" class="button menu-btn">Get Reports</button>
+                </div>
+                <div id="menu-bottom">
+                    <button id="get-blogs" class="button menu-btn">Get Blogs</button>
+                </div>
+            </div>
+            <div id="search-div">
+                <form autocomplete="off" id="search-form">
+                    <label id="search-label" for="search"></label>
+                    <div id="search-input-div">
+                        <input type="search" id="search-news" name="search"/>
+                    </div>
+                    <button id="search-btn" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="articles">
+            <div id="div-list-articles">
+                <ul id="list-articles">
+                </ul>
+            </div>
+            <div class="article-buttons btn-div">
+                <button id="article-prev" class="previous-article-list">Previous</button>
+                <button id="article-next" class="next-article-list">Next</button>
+            </div>
+        </section>
+        <section id="reports">
+            <div id="div-list-reports">
+                <ul id="list-reports">
+                </ul>
+            </div>
+            <div class="report-buttons btn-div">
+                <button id="report-prev" class="previous-report-list">Previous</button>
+                <button id="report-next" class="next-report-list">Next</button>
+            </div>
+        </section>
+        <section id="blogs">
+            <div id="div-list-blogs">
+                <ul id="list-blogs">
+                </ul>
+            </div>
+            <div class="blog-buttons btn-div">
+                <button id="blog-prev" class="previous-blog-list">Previous</button>
+                <button id="blog-next" class="next-blog-list">Next</button>
+            </div>
+        </section>
+    </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
