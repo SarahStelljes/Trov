@@ -45,6 +45,8 @@ var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
 var blogList = document.querySelector("#list-blogs");
 
+// test
+var mediaQuery980 = window.matchMedia("(max-width: 980px)");
 
 var requestSpaceInfo = function(infoType){
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
@@ -83,16 +85,26 @@ var requestSpaceInfo = function(infoType){
                     articleCard.setAttribute("url", data[i].url);
                     articleCard.id="article-"+object.id;
 
+                    console.log(articleCard);
+
+                    var articleImgDiv = document.createElement("div");
+                    articleImgDiv.className="art-div";
+                    articleCard.appendChild(articleImgDiv);
+
                     // create article image and attach it to article card
                     var articleImg = document.createElement("img");
                     articleImg.className="article-img";
                     articleImg.src = object.imageUrl;
-                    articleCard.appendChild(articleImg);
+                    articleImgDiv.appendChild(articleImg);
                     
                     // create article info div and attach to article card
                     var articleInfo = document.createElement("div");
                     articleInfo.className="article-info";
                     articleCard.appendChild(articleInfo);
+
+                    if(mediaQuery980){
+                        med980(object, articleCard, articleInfo);
+                    }
                     
                     // create article title and attach it to article info div
                     var articleTitle = document.createElement("h3");
@@ -281,7 +293,7 @@ var requestDailySpaceImg = function(){
             return res.json();
         })
         .then(function(data){
-            var object = JSON.stringify(data);
+            // var object = JSON.stringify(data);
             mainContainer.style.backgroundImage = "url("+data.url+")";
         })
         .catch(function(err){
@@ -494,6 +506,12 @@ var checkTime = function(){
 // request daily space img on load
 requestDailySpaceImg();
 
+var med980 = function(object, card, cardInfo){
+    card.style.backgroundImage = "url("+object.imageUrl+")";
+    card.removeChild(card.firstChild);
+    cardInfo.style.width = "100%";
+    cardInfo.style.backgroundImage = "rgba(F,F,F, .5)";
+}
 // interval for checking to see 
 setInterval(requestDailySpaceImg, (1000 * 60) * 120);
 
@@ -518,4 +536,4 @@ searchBtn.addEventListener("click", searchFor);
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.dropdown-trigger');
     // var instances = M.Dropdown.init(elems, options);
-  });
+});
