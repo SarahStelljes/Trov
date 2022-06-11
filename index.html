@@ -25,18 +25,6 @@
                     <button id="get-blogs" class="button menu-btn">Get Blogs</button>
                 </div>
             </div>
-            <div id="search-div">
-                <form autocomplete="off" id="search-form">
-                    <label id="search-label" for="search"></label>
-                    <div id="search-input-div">
-                        <input list="searches" type="search" class ="dropdown-trigger" id="search-news" name="search"/>
-                        <datalist id="searches">
-                            <option id="searchList"></option>
-                        </datalist>
-                    </div>
-                    <button id="search-btn" type="submit">Submit</button>
-                </form>
-            </div>
         </div>
     </header>
     <main>
@@ -44,8 +32,10 @@
             <form autocomplete="off" id="search-form">
                 <label id="search-label" for="search"></label>
                 <div id="search-input-div">
-                    <input type="search" class ="dropdown-trigger" id="search-news" name="search"/>
-                    <ul id="dropdown" class="dropdown-content"></ul>
+                    <input list="searches" type="search" class ="dropdown-trigger" id="search-news" name="search"/>
+                    <datalist id="searches">
+                        <option id="searchList"></option>
+                    </datalist>
                 </div>
                 <button id="search-btn" type="submit">Submit</button>
             </form>
@@ -81,6 +71,9 @@
             </div>
         </section>
     </main>
+    <footer>
+        
+    </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>

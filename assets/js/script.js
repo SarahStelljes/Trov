@@ -40,8 +40,11 @@ var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
 var blogList = document.querySelector("#list-blogs");
 
-// test
-var mediaQuery980 = window.matchMedia("(max-width: 980px)");
+// get current media queries
+var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+var mediaQuery980 = 980;
+
+console.log("Current Window width: "+width+"| mediaquery980 thing: "+mediaQuery980);
 
 var requestSpaceInfo = function(infoType){
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
@@ -97,7 +100,7 @@ var requestSpaceInfo = function(infoType){
                     articleInfo.className="article-info";
                     articleCard.appendChild(articleInfo);
 
-                    if(mediaQuery980){
+                    if(width <= mediaQuery980){
                         med980(object, articleCard, articleInfo);
                     }
                     
@@ -120,7 +123,7 @@ var requestSpaceInfo = function(infoType){
                         summARRY = summARRY.substring(119, 0) + "...";
                     }
                     articleSum.textContent=summARRY;
-                    artDiv.appendChild(articleSum);
+                    articleInfo.appendChild(articleSum);
 
                     // create published-info div
                     var pubDiv = document.createElement("div");
@@ -141,7 +144,7 @@ var requestSpaceInfo = function(infoType){
                     pubDiv.appendChild(pubOn);
                     
                     // pub div attach to article card
-                    artDiv.appendChild(pubDiv);
+                    articleInfo.appendChild(pubDiv);
 
                     // attach article card to article list
                     articleList.appendChild(articleCard);
@@ -505,7 +508,7 @@ var med980 = function(object, card, cardInfo){
     card.style.backgroundImage = "url("+object.imageUrl+")";
     card.removeChild(card.firstChild);
     cardInfo.style.width = "100%";
-    cardInfo.style.backgroundImage = "rgba(F,F,F, .5)";
+    cardInfo.style.backgroundColor = "rgba(255,255,255, .7)";
 }
 // interval for checking to see 
 setInterval(requestDailySpaceImg, (1000 * 60) * 120);
