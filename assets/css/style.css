@@ -27,33 +27,46 @@
   list-style: none;
 }
 
-.article-title {
+.article-title, .report-title, .blog-title {
   font-size: 2rem;
+  margin: 0;
+  text-align: center;
 }
 
 .published-info h4 {
   font-size: 24px;
 }
-
-.article-card, .report-card, .blog-card{
+.list {
+  width: 60%;
+}
+.card{
   background-color: rgb(41, 184, 189);
-  width: 1300px;
+  width: 100%;
   height: 200px;
   padding: 5px;
   display: flex;
   border: 2px solid black;
   justify-content: space-between;
   align-items: center;
-  margin: 5px;
+  margin: 10px;
+  border-radius: 25px;
+}
+.art-div {
+  width: 20%;
+  display: flex;
+  align-items: center;
 }
 .article-img, .report-img, .blog-img{
   height: 195px;
   width: 195px;
   margin-right: 5px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
   object-fit: cover;
 }
 .article-info, .report-info, .blog-info{
-  width: 1105px;
+  width: 65%;
+  margin-right: 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -61,6 +74,7 @@
 }
 .article-summary, .report-summary, .blog-summary{
   text-align: center;
+  margin: 0;
 }
 
 body{
@@ -68,9 +82,6 @@ body{
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size:18px;
   color:#242929;
-  
-  
-  
 }
 
 #mainContainer{
@@ -78,6 +89,7 @@ body{
   background-size: cover;
   background-position:center;
   height:100vh;
+  width: 100%;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -144,4 +156,50 @@ body{
 
 #articles {
   margin-top: 25px;
+}
+
+.article-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 1280px){
+  .card{
+    width: 100%;
+    justify-content: space-between;
+  }
+  .art-div {
+    width: 0;
+    padding: 1px;
+  }
+  .article-title, .report-title, .blog-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight:bold;
+    margin: 0;
+  }
+  .published-info h4 {
+    font-weight:bolder;
+    font-size: 18px;
+  }
+  .article-info, .report-info, .blog-info{
+    width: 65%;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 980px){
+  .list {
+    width: 90%;
+  }
+  .card{
+    height: 400px;
+    background-image: 
+  }
+}
+@media screen and (max-width: 768px){
+  
+}
+@media screen and (max-width: 575px){
+
 }

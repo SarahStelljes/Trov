@@ -30,21 +30,18 @@ var previousSearches = [];
 
 // Fills array with local storage or gives empty array.
 var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
-savedSearches.forEach(function(menuItem){
-    console.log(menuItem);
-    var li = $('<li>');
-    var aTag = $('<a>').attr('value', menuItem);
-    console.log(li, aTag);
-}) 
-// // // Dropdown initialization for search bar
-//Append these into the dropdown.
-// $('.dropdown-trigger').dropdown();
+
+for (i = 0; i < 5; i++) {
+    $('<option id="searchList" />').text(savedSearches[i]).appendTo('#searches');
+}
 
 // list types
 var articleList = document.querySelector("#list-articles");
 var reportList = document.querySelector("#list-reports");
 var blogList = document.querySelector("#list-blogs");
 
+// test
+var mediaQuery980 = window.matchMedia("(max-width: 980px)");
 
 var requestSpaceInfo = function(infoType){
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
@@ -83,16 +80,26 @@ var requestSpaceInfo = function(infoType){
                     articleCard.setAttribute("url", data[i].url);
                     articleCard.id="article-"+object.id;
 
+                    console.log(articleCard);
+
+                    var articleImgDiv = document.createElement("div");
+                    articleImgDiv.className="art-div";
+                    articleCard.appendChild(articleImgDiv);
+
                     // create article image and attach it to article card
                     var articleImg = document.createElement("img");
                     articleImg.className="article-img";
                     articleImg.src = object.imageUrl;
-                    articleCard.appendChild(articleImg);
+                    articleImgDiv.appendChild(articleImg);
                     
                     // create article info div and attach to article card
                     var articleInfo = document.createElement("div");
                     articleInfo.className="article-info";
                     articleCard.appendChild(articleInfo);
+
+                    if(mediaQuery980){
+                        med980(object, articleCard, articleInfo);
+                    }
                     
                     // create article title and attach it to article info div
                     var articleTitle = document.createElement("h3");
@@ -100,12 +107,20 @@ var requestSpaceInfo = function(infoType){
                     articleTitle.textContent=object.title;
                     articleInfo.appendChild(articleTitle);
                     
-                    
+                    // create article div
+                    var artDiv = document.createElement("div");
+                    artDiv.className = "article-div";
+                    articleInfo.appendChild(artDiv);
+
                     // create article summary and attach to article info div
                     var articleSum = document.createElement("p");
                     articleSum.className="article-summary";
-                    articleSum.textContent=object.summary;
-                    articleInfo.appendChild(articleSum);
+                    var summARRY = object.summary;
+                    if(summARRY.length > 120){
+                        summARRY = summARRY.substring(119, 0) + "...";
+                    }
+                    articleSum.textContent=summARRY;
+                    artDiv.appendChild(articleSum);
 
                     // create published-info div
                     var pubDiv = document.createElement("div");
@@ -120,11 +135,13 @@ var requestSpaceInfo = function(infoType){
                     // published on
                     var pubOn = document.createElement("h4");
                     pubOn.className ="published-on";
-                    pubOn.textContent="Published On: "+object.publishedAt;
+                    var date = object.publishedAt;
+                    date = date.split("T")[0];
+                    pubOn.textContent="Published On: "+date;
                     pubDiv.appendChild(pubOn);
                     
                     // pub div attach to article card
-                    articleInfo.appendChild(pubDiv);
+                    artDiv.appendChild(pubDiv);
 
                     // attach article card to article list
                     articleList.appendChild(articleCard);
@@ -158,12 +175,17 @@ var requestSpaceInfo = function(infoType){
                     reportTitle.className="report-title";
                     reportTitle.textContent=object.title;
                     reportInfo.appendChild(reportTitle);
+
+                    // create report div
+                    var repDiv = document.createElement("div");
+                    repDiv.className = "report-div";
+                    reportInfo.appendChild(repDiv);
                                         
                     // create report summary and attach to report info div
                     var reportSum = document.createElement("p");
                     reportSum.className="report-summary";
                     reportSum.textContent=object.summary;
-                    reportInfo.appendChild(reportSum);
+                    repDiv.appendChild(reportSum);
 
                     // create published-info div
                     var pubDiv = document.createElement("div");
@@ -182,7 +204,7 @@ var requestSpaceInfo = function(infoType){
                     pubDiv.appendChild(pubOn);
             
                     // pub div attach to report card
-                    reportInfo.appendChild(pubDiv);
+                    repDiv.appendChild(pubDiv);
 
                     // attach report card to report list
                     reportList.appendChild(reportCard);
@@ -216,12 +238,17 @@ var requestSpaceInfo = function(infoType){
                     blogTitle.className="blog-title";
                     blogTitle.textContent=object.title;
                     blogInfo.appendChild(blogTitle);
+                    
+                    // create blog div
+                    var blogDiv = document.createElement("div");
+                    blogDiv.className = "blog-div";
+                    blogInfo.appendChild(blogDiv);
                                         
                     // create blog summary and attach to blog info div
                     var blogSum = document.createElement("p");
                     blogSum.className="blog-summary";
                     blogSum.textContent=object.summary;
-                    blogInfo.appendChild(blogSum);
+                    blogDiv.appendChild(blogSum);
 
                     // create published-info div
                     var pubDiv = document.createElement("div");
@@ -240,7 +267,7 @@ var requestSpaceInfo = function(infoType){
                     pubDiv.appendChild(pubOn);
             
                     // pub div attach to blog card
-                    blogInfo.appendChild(pubDiv);
+                    blogDiv.appendChild(pubDiv);
 
                     // attach blog card to blog list
                     blogList.appendChild(blogCard);
@@ -261,7 +288,7 @@ var requestDailySpaceImg = function(){
             return res.json();
         })
         .then(function(data){
-            var object = JSON.stringify(data);
+            // var object = JSON.stringify(data);
             mainContainer.style.backgroundImage = "url("+data.url+")";
         })
         .catch(function(err){
@@ -426,16 +453,16 @@ var searchFor = function(event){
         // unshift determines reverse order for the array
         savedSearches.unshift(searchThis);
         localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
+        for (i = 0; i < 5; i++) {
+            $('<option id="searchList" />').text(savedSearches[i]).appendTo('#searches');
+        }
     }
-    
-    console.log(savedSearches);
     requestSearch = "title_contains="+searchThis+"&";
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
     fetch(requestUrl).then((res) => res.json()).then(function(data){
         console.log(data);
         saveSearch(searchThis);
     });
-
 };
 var saveSearch = function(searchThis){
     if(previousSearches.length < 5){
@@ -474,6 +501,12 @@ var checkTime = function(){
 // request daily space img on load
 requestDailySpaceImg();
 
+var med980 = function(object, card, cardInfo){
+    card.style.backgroundImage = "url("+object.imageUrl+")";
+    card.removeChild(card.firstChild);
+    cardInfo.style.width = "100%";
+    cardInfo.style.backgroundImage = "rgba(F,F,F, .5)";
+}
 // interval for checking to see 
 setInterval(requestDailySpaceImg, (1000 * 60) * 120);
 
@@ -495,7 +528,3 @@ blogNext.addEventListener("click", blogNextPage);
 // other event listners
 searchBtn.addEventListener("click", searchFor);
 // searchInput.addEventListener("input");
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.dropdown-trigger');
-    // var instances = M.Dropdown.init(elems, options);
-  });

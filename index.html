@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Adding Materialize for drop down menu-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <link rel="stylesheet" href="assets/css/style.css"/>
     <title>Trov</title>
 </head>
@@ -25,7 +25,18 @@
                     <button id="get-blogs" class="button menu-btn">Get Blogs</button>
                 </div>
             </div>
-            
+            <div id="search-div">
+                <form autocomplete="off" id="search-form">
+                    <label id="search-label" for="search"></label>
+                    <div id="search-input-div">
+                        <input list="searches" type="search" class ="dropdown-trigger" id="search-news" name="search"/>
+                        <datalist id="searches">
+                            <option id="searchList"></option>
+                        </datalist>
+                    </div>
+                    <button id="search-btn" type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     </header>
     <main>
@@ -40,7 +51,7 @@
             </form>
         </div>
         <section id="articles">
-            <div id="div-list-articles">
+            <div id="div-list-articles" class="list">
                 <ul id="list-articles">
                 </ul>
             </div>
@@ -50,7 +61,7 @@
             </div>
         </section>
         <section id="reports">
-            <div id="div-list-reports">
+            <div id="div-list-reports" class="list">
                 <ul id="list-reports">
                 </ul>
             </div>
@@ -60,7 +71,7 @@
             </div>
         </section>
         <section id="blogs">
-            <div id="div-list-blogs">
+            <div id="div-list-blogs" class="list">
                 <ul id="list-blogs">
                 </ul>
             </div>
@@ -71,8 +82,6 @@
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!--Adding Materialize script for drop down menu-->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
