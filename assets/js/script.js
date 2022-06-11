@@ -17,6 +17,7 @@ var blogNext = document.querySelector("#blog-next");
 var articleDiv = document.getElementById("articles");
 var reportDiv = document.getElementById("reports");
 var blogDiv = document.getElementById("blogs");
+var footer = document.getElementById("footer");
 
 // request info vars
 var type;
@@ -110,11 +111,6 @@ var requestSpaceInfo = function(infoType){
                     articleTitle.textContent=object.title;
                     articleInfo.appendChild(articleTitle);
                     
-                    // create article div
-                    var artDiv = document.createElement("div");
-                    artDiv.className = "article-div";
-                    articleInfo.appendChild(artDiv);
-
                     // create article summary and attach to article info div
                     var articleSum = document.createElement("p");
                     articleSum.className="article-summary";
@@ -357,6 +353,7 @@ var blogNextPage = function(){
 var showArticles = function(){
     type = "articles";
     changeHeaderStyle(type);
+    footer.style.display="flex";
     articleDiv.style.display="flex";
     reportDiv.style.display="none";
     blogDiv.style.display="none";
@@ -378,6 +375,7 @@ var showArticles = function(){
 var showReports = function(){
     type = "reports";
     changeHeaderStyle(type);
+    footer.style.display="flex";
     reportDiv.style.display="flex";
     blogDiv.style.display="none";
     articleDiv.style.display="none";
@@ -399,6 +397,7 @@ var showReports = function(){
 var showBlogs = function(){
     type = "blogs";
     changeHeaderStyle(type);
+    footer.style.display="flex";
     blogDiv.style.display="flex";
     articleDiv.style.display="none";
     reportDiv.style.display="none";

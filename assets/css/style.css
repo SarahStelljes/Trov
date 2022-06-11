@@ -19,18 +19,23 @@
 #articles, #reports, #blogs{
   display: none;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 #list-articles, #list-reports, #list-blogs{
+  padding: 0;
   list-style: none;
 }
 .article-title, .report-title, .blog-title {
-  font-size: 2rem;
+  font-size: 26px;
+  padding: 5px;
   margin: 0;
   text-align: center;
 }
 .published-info h4 {
-  font-size: 24px;
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .list {
   width: 60%;
@@ -60,14 +65,17 @@
   border-bottom-left-radius: 25px;
   object-fit: cover;
 }
-.article-info{
-  width: 800px;
+.article-info, .report-info, .blog-info{
+  width: 65%;
+  height: 100%;
+  margin-right: 10%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .article-summary, .report-summary, .blog-summary{
+  font-size: 20px;
   text-align: center;
   margin: 0;
 }
@@ -157,8 +165,11 @@ body{
   align-items: center;
 }
 footer{
+  width: 100%;
   height: 200px;
   background-image: var(--footer);
+  display: none;
+  align-items: center;
 }
 @media screen and (max-width: 1280px){
   .card{
@@ -183,13 +194,16 @@ footer{
     width: 65%;
     margin-right: 0;
   }
+  .article-summary, .report-summary, .blog-summary{
+    font-size:2vh;
+  }
 }
 @media screen and (max-width: 980px){
   .list {
     width: 90%;
   }
   .card{
-    height: 400px;
+    height: 300px;
     background-image: "";
     background-size: cover;
     background-position:center;
@@ -197,6 +211,10 @@ footer{
   .article-info{
     height: 50%;
     padding: 5px;
+    justify-content: space-between;
+  }
+  .published-info {
+    width: 65%;
     justify-content: space-between;
   }
   .published-info h4{
@@ -209,4 +227,30 @@ footer{
 @media screen and (max-width: 768px){
 }
 @media screen and (max-width: 575px){
+  .article-summary{
+    font-size: 1rem;
+  }
+  .article-title{
+    font-size: 1.1rem;
+  }
+  .published-info h4{
+    font-size: 0.9rem;
+  }
+  .outline{
+    width: 100%;
+    height: 100px;
+    background-image: radial-gradient(#FFFFFF, rgba(0, 0, 0, 0) 73%);
+  }
+  #outline-p{
+    font-size: 18px;
+  }
+  #menu-and-outline-holder{
+    width:100%;
+  }
+  #mainContainer{
+    padding: 0;
+  }
+  #mainContainer .button{
+    padding:5px 10px;
+  }
 }
