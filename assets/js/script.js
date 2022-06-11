@@ -497,5 +497,5 @@ searchBtn.addEventListener("click", searchFor);
 // searchInput.addEventListener("input");
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.dropdown-trigger');
-    // var instances = M.Dropdown.init(searchThis, searchThis);
+    // var instances = M.Dropdown.init(elems, options);
   });

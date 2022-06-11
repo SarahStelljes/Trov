@@ -1,6 +1,7 @@
 :root{
   padding: 0;
   margin: 0;
+  --glowish: radial-gradient(#ffffff, rgba(0, 0, 0, 0) 50%);
 }
 
 #menu-and-outline-holder{
@@ -108,12 +109,18 @@ body{
   color:rgb(255, 255, 255);
 }
 
+.outline {
+  height: 100px;
+  width: 1000px;
+  border-radius:100%;
+  background: var(--glowish);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #outline-p {
-  
   font-size: 30px;
-  color: rgb(223, 210, 26);
-  text-shadow: 2px 2px 2px rgb(26, 75, 90);
-  margin-top: 40px;
+  color: rgb(15, 1, 53);
 }
 
 .published-on {
