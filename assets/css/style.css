@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   --glowish: radial-gradient(#FFFFFF, rgba(0, 0, 0, 0) 50%);
+  --footer: linear-gradient(#001c43, black);
 }
 #menu-and-outline-holder{
   display: flex;
@@ -156,6 +157,10 @@ body{
   justify-content: center;
   align-items: center;
 }
+footer{
+  height: 200px;
+  background-image: var(--footer);
+}
 @media screen and (max-width: 1280px){
   .card{
     width: 100%;
@@ -187,6 +192,19 @@ body{
   .card{
     height: 400px;
     background-image: "";
+    background-size: cover;
+    background-position:center;
+  }
+  .article-info{
+    height: 50%;
+    padding: 5px;
+    justify-content: space-between;
+  }
+  .published-info h4{
+    margin: 0;
+  }
+  .article-summary{
+    font-size: 24px;
   }
 }
 @media screen and (max-width: 768px){
