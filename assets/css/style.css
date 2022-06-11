@@ -37,12 +37,12 @@
 }
 .card{
   background-color: rgb(41, 184, 189);
-  width: 100%;
+  width: 800px;
   height: 200px;
   padding: 5px;
   display: flex;
   border: 2px solid black;
-  justify-content: space-between;
+  
   align-items: center;
   margin: 10px;
   border-radius: 25px;
@@ -60,9 +60,8 @@
   border-bottom-left-radius: 25px;
   object-fit: cover;
 }
-.article-info, .report-info, .blog-info{
-  width: 65%;
-  margin-right: 10%;
+.article-info{
+  width: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
