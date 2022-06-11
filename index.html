@@ -14,7 +14,7 @@
         <h1 id="trov-title">Trov</h1>
         <div id="menu-and-outline-holder">
             <div class="outline">
-             <p id="outline-p">Changing Your View On Space</p>
+             <p id="outline-p"><b>Changing Your View On Space</b></p>
             </div>
             <div id="menu">
                 <div id="menu-top">
@@ -40,8 +40,18 @@
         </div>
     </header>
     <main>
+        <div id="search-div">
+            <form autocomplete="off" id="search-form">
+                <label id="search-label" for="search"></label>
+                <div id="search-input-div">
+                    <input type="search" class ="dropdown-trigger" id="search-news" name="search"/>
+                    <ul id="dropdown" class="dropdown-content"></ul>
+                </div>
+                <button id="search-btn" type="submit">Submit</button>
+            </form>
+        </div>
         <section id="articles">
-            <div id="div-list-articles">
+            <div id="div-list-articles" class="list">
                 <ul id="list-articles">
                 </ul>
             </div>
@@ -51,7 +61,7 @@
             </div>
         </section>
         <section id="reports">
-            <div id="div-list-reports">
+            <div id="div-list-reports" class="list">
                 <ul id="list-reports">
                 </ul>
             </div>
@@ -61,7 +71,7 @@
             </div>
         </section>
         <section id="blogs">
-            <div id="div-list-blogs">
+            <div id="div-list-blogs" class="list">
                 <ul id="list-blogs">
                 </ul>
             </div>
@@ -72,9 +82,6 @@
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
