@@ -391,16 +391,16 @@ var searchFor = function(event){
         // unshift determines reverse order for the array
         savedSearches.unshift(searchThis);
         localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
+        for (i = 0; i < 5; i++) {
+            $('<option id="searchList" />').text(savedSearches[i]).appendTo('#searches');
+        }
     }
-    
-    console.log(savedSearches);
     requestSearch = "title_contains="+searchThis+"&";
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
     console.log(requestUrl);
     fetch(requestUrl).then((res) => res.json()).then(function(data){
         console.log(data);
     });
-
 };
 
 // $(".card", function(){
