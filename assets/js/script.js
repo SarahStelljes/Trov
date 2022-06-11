@@ -38,7 +38,7 @@ savedSearches.forEach(function(menuItem){
 }) 
 // // // Dropdown initialization for search bar
 //Append these into the dropdown.
-// $('.dropdown-trigger').dropdown();
+$('.dropdown-trigger').dropdown();
 
 // list types
 var articleList = document.querySelector("#list-articles");
@@ -447,5 +447,5 @@ searchBtn.addEventListener("click", searchFor);
 // searchInput.addEventListener("input");
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.dropdown-trigger');
-    var instances = M.Dropdown.init(, searchThis);
+    var instances = M.Dropdown.init(elems, options);
   });
