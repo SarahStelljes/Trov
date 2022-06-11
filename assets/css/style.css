@@ -27,24 +27,28 @@
   list-style: none;
 }
 
-.article-title {
+.article-title, .report-title, .blog-title {
   font-size: 2rem;
+  margin: 0;
 }
 
 .published-info h4 {
   font-size: 24px;
 }
-
-.article-card, .report-card, .blog-card{
+.list {
+  width: 60%;
+}
+.card{
   background-color: rgb(41, 184, 189);
-  width: 1300px;
+  width: 100%;
   height: 200px;
   padding: 5px;
   display: flex;
   border: 2px solid black;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin: 5px;
+  margin: 10px;
+  border-radius: 25px;
 }
 .article-img, .report-img, .blog-img{
   height: 195px;
@@ -61,6 +65,7 @@
 }
 .article-summary, .report-summary, .blog-summary{
   text-align: center;
+  margin: 0;
 }
 
 body{
@@ -78,6 +83,7 @@ body{
   background-size: cover;
   background-position:center;
   height:100vh;
+  width: 100%;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -144,4 +150,40 @@ body{
 
 #articles {
   margin-top: 25px;
+}
+
+.article-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 1280px){
+  .card{
+    width: 900px;
+  }
+  .article-title, .report-title, .blog-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight:bold;
+    margin: 0;
+  }
+  .published-info h4 {
+    font-weight:bolder;
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 980px){
+  .list {
+    width: 90%;
+  }
+  .card{
+    height: 400px;
+  }
+}
+@media screen and (max-width: 768px){
+  
+}
+@media screen and (max-width: 575px){
+
 }
