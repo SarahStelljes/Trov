@@ -5,10 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="./assets/css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <link rel="stylesheet" href="assets/css/style.css"/>
     <title>Trov</title>¬ø
 </head>
@@ -32,8 +29,10 @@
                 <form autocomplete="off" id="search-form">
                     <label id="search-label" for="search"></label>
                     <div id="search-input-div">
-                        <input type="search" class ="dropdown-trigger" id="search-news" name="search"/>
-                        <ul id="dropdown" class="dropdown-content"></ul>
+                        <input list="searches" type="search" class ="dropdown-trigger" id="search-news" name="search"/>
+                        <datalist id="searches">
+                            <option id="searchList"></option>
+                        </datalist>
                     </div>
                     <button id="search-btn" type="submit">Submit</button>
                 </form>
@@ -73,8 +72,9 @@
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
-     <!--JavaScript at end of body for optimized loading-->
-     <script type="text/javascript" src="./assets/js/materialize.min.js"></script>
 </body>
 </html>

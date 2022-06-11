@@ -30,15 +30,9 @@ var previousSearches = [];
 
 // Fills array with local storage or gives empty array.
 var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
-savedSearches.forEach(function(menuItem){
-    console.log(menuItem);
-    var li = $('<li>');
-    var aTag = $('<a>').attr('value', menuItem);
-    console.log(li, aTag);
-}) 
-// // // Dropdown initialization for search bar
-//Append these into the dropdown.
-$('.dropdown-trigger').dropdown();
+for (i = 0; i < 5; i++) {
+    $('<option id="searchList" />').text(savedSearches[i]).appendTo('#searches');
+}
 
 // list types
 var articleList = document.querySelector("#list-articles");
