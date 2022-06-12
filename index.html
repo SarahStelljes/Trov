@@ -6,6 +6,8 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <!--Adding Bulma Framework-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="assets/css/style.css"/>
     <title>Trov</title>
 </head>
@@ -32,12 +34,12 @@
             <form autocomplete="off" id="search-form">
                 <label id="search-label" for="search"></label>
                 <div id="search-input-div">
-                    <input list="searches" type="search" class ="dropdown-trigger" id="search-news" name="search"/>
+                    <input list="searches" type="search" class ="dropdown-trigger input is-rounded" id="search-news" name="search"/>
                     <datalist id="searches">
                         <option id="searchList"></option>
                     </datalist>
                 </div>
-                <button id="search-btn" type="submit">Submit</button>
+                <button class="button" id="search-btn" type="submit">Submit</button>
             </form>
         </div>
         <section id="articles">
@@ -46,8 +48,8 @@
                 </ul>
             </div>
             <div class="article-buttons btn-div">
-                <button id="article-prev" class="previous-article-list">Previous</button>
-                <button id="article-next" class="next-article-list">Next</button>
+                <button class="button" id="article-prev" class="previous-article-list">Previous</button>
+                <button class="button" id="article-next" class="next-article-list">Next</button>
             </div>
         </section>
         <section id="reports">
@@ -56,8 +58,8 @@
                 </ul>
             </div>
             <div class="report-buttons btn-div">
-                <button id="report-prev" class="previous-report-list">Previous</button>
-                <button id="report-next" class="next-report-list">Next</button>
+                <button class="button" id="report-prev" class="previous-report-list">Previous</button>
+                <button class="button" id="report-next" class="next-report-list">Next</button>
             </div>
         </section>
         <section id="blogs">
@@ -66,8 +68,8 @@
                 </ul>
             </div>
             <div class="blog-buttons btn-div">
-                <button id="blog-prev" class="previous-blog-list">Previous</button>
-                <button id="blog-next" class="next-blog-list">Next</button>
+                <button class="button" id="blog-prev" class="previous-blog-list">Previous</button>
+                <button class="button" id="blog-next" class="next-blog-list">Next</button>
             </div>
         </section>
     </main>
