@@ -136,19 +136,17 @@ body{
   display: flex;
 }
 #search-div {
-  border: solid blue 3px;
-  height: 300px;
   align-items: center;
+  height: 100px;
+  align-items: center;
+  border-bottom: solid #001c43 1px;
 }
 #search-div, #search-form{
   display: none;
   justify-content: center;
   align-items: center;
 }
-#search-div {
-  border: solid blue 3px;
-  align-items: center;
-}
+
 #search-form{
   display: flex;
 }
