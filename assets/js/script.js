@@ -26,7 +26,8 @@ var pageReq = 0;
 var searchBtn = document.querySelector("#search-btn");
 var searchInput = document.querySelector("#search-news");
 var searchThis;
-var requestSearch="title_contains=Stars&";
+var userSearched = false;
+var requestSearch="";
 var previousSearches = [];
 
 // Fills array with local storage or gives empty array.
@@ -49,7 +50,9 @@ console.log("Current Window width: "+width+"| mediaquery980 thing: "+mediaQuery9
 
 var requestSpaceInfo = function(infoType){
     var currentTerm = localStorage.getItem("currentTerm");
-    requestSearch = "title_contains="+currentTerm+"&";
+    if(userSearched){
+        requestSearch = "title_contains="+currentTerm+"&";
+    }
     console.log(infoType);
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
     // disable prev button if page req is 0
@@ -358,6 +361,7 @@ var blogNextPage = function(){
 //// SHOW SECTIONS
 // function to show articles
 var showArticles = function(){
+    userSearched = false;
     type = "articles";
     changeHeaderStyle(type);
     footer.style.display="flex";
@@ -380,6 +384,7 @@ var showArticles = function(){
 };
 //function to show reports
 var showReports = function(){
+    userSearched = false;
     type = "reports";
     changeHeaderStyle(type);
     footer.style.display="flex";
@@ -402,6 +407,7 @@ var showReports = function(){
 };
 //function to show blogs
 var showBlogs = function(){
+    userSearched = false;
     type = "blogs";
     changeHeaderStyle(type);
     footer.style.display="flex";
@@ -471,6 +477,7 @@ var searchFor = function(event){
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
     fetch(requestUrl).then((res) => res.json()).then(function(data){
         console.log(data);
+        userSearched = true;
         saveSearch(searchThis);
     });
 };
