@@ -135,19 +135,16 @@ body{
 .published-info{
   display: flex;
 }
-#search-div {
-  border: solid blue 3px;
-  height: 300px;
-  align-items: center;
-}
 #search-div, #search-form{
   display: none;
   justify-content: center;
   align-items: center;
 }
 #search-div {
-  border: solid blue 3px;
   align-items: center;
+  height: 100px;
+  align-items: center;
+  border-bottom: solid #001c43 1px;
 }
 #search-form{
   display: flex;
@@ -241,7 +238,7 @@ footer{
     font-size: 1.05rem;
   }
   .published-info h4{
-    font-size: 0.9rem;
+    font-size: 0.7rem;
   }
   .outline{
     width: 100%;
