@@ -111,7 +111,11 @@ var requestSpaceInfo = function(infoType){
                     // create article title and attach it to article info div
                     var articleTitle = document.createElement("h3");
                     articleTitle.className="article-title";
-                    articleTitle.textContent=object.title;
+                    var artTitle = object.title;
+                    if(artTitle.length > 50){
+                        artTitle = artTitle.substring(49, 0)+"...";
+                    }
+                    articleTitle.textContent=artTitle;
                     articleInfo.appendChild(articleTitle);
                     
                     // create article summary and attach to article info div
