@@ -4,6 +4,9 @@
   --glowish: radial-gradient(#FFFFFF, rgba(0, 0, 0, 0) 50%);
   --footer: linear-gradient(#001c43, black);
 }
+.linker{
+
+}
 #menu-and-outline-holder{
   display: flex;
   flex-direction: column;
@@ -26,7 +29,7 @@
   padding: 0;
   list-style: none;
 }
-.article-title, .report-title, .blog-title {
+.linker, .report-title, .blog-title {
   font-size: 26px;
   padding: 5px;
   margin: 0;
