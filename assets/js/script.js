@@ -82,14 +82,12 @@ var requestSpaceInfo = function(infoType){
                     // stringify data
                     var object = JSON.stringify(data[i]);
                     object = JSON.parse(object)
-
+                    console.log(object);
                     // create article card
                     var articleCard = document.createElement("div");
                     articleCard.className="article-card card";
                     articleCard.setAttribute("url", data[i].url);
                     articleCard.id="article-"+object.id;
-
-                    console.log(articleCard);
 
                     var articleImgDiv = document.createElement("div");
                     articleImgDiv.className="art-div";
@@ -110,15 +108,19 @@ var requestSpaceInfo = function(infoType){
                         med980(object, articleCard, articleInfo);
                     }
                     
-                    // create article title and attach it to article info div
-                    var articleTitle = document.createElement("h3");
-                    articleTitle.className="article-title";
+                    var articleUrl = document.createElement("a");
+                    articleUrl.classList = "linker";
+                    articleUrl.id = "art-link-"+object.id;
                     var artTitle = object.title;
                     if(artTitle.length > 50){
                         artTitle = artTitle.substring(49, 0)+"...";
                     }
-                    articleTitle.textContent=artTitle;
-                    articleInfo.appendChild(articleTitle);
+                    articleUrl.textContent = artTitle;
+                    articleUrl.href = object.url;
+                    console.log(articleUrl.innerText);
+                    console.log(articleUrl);
+
+                    articleInfo.appendChild(articleUrl);
                     
                     // create article summary and attach to article info div
                     var articleSum = document.createElement("p");
