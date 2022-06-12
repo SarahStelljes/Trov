@@ -26,7 +26,7 @@ var pageReq = 0;
 var searchBtn = document.querySelector("#search-btn");
 var searchInput = document.querySelector("#search-news");
 var searchThis;
-var requestSearch="";
+var requestSearch="title_contains=Stars&";
 var previousSearches = [];
 
 // Fills array with local storage or gives empty array.
@@ -48,6 +48,9 @@ var mediaQuery980 = 980;
 console.log("Current Window width: "+width+"| mediaquery980 thing: "+mediaQuery980);
 
 var requestSpaceInfo = function(infoType){
+    var currentTerm = localStorage.getItem("currentTerm");
+    requestSearch = "title_contains="+currentTerm+"&";
+    console.log(infoType);
     var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
     // disable prev button if page req is 0
     if(pageReq === 0){
@@ -108,7 +111,11 @@ var requestSpaceInfo = function(infoType){
                     // create article title and attach it to article info div
                     var articleTitle = document.createElement("h3");
                     articleTitle.className="article-title";
-                    articleTitle.textContent=object.title;
+                    var artTitle = object.title;
+                    if(artTitle.length > 50){
+                        artTitle = artTitle.substring(49, 0)+"...";
+                    }
+                    articleTitle.textContent=artTitle;
                     articleInfo.appendChild(articleTitle);
                     
                     // create article summary and attach to article info div
@@ -441,7 +448,7 @@ var changeHeaderStyle = function(infoType){
     trovTitle.style.fontSize = "32px";
     menuBottom.style.marginLeft = "4px";
     searchDiv.style.display="flex";
-    searchLbl.textContent="Search "+infoType+": ";
+    // searchLbl.textContent="Search "+infoType+": ";
 }
 var searchFor = function(event){
     event.preventDefault();
@@ -455,6 +462,7 @@ var searchFor = function(event){
         // unshift determines reverse order for the array
         savedSearches.unshift(searchThis);
         localStorage.setItem("savedSearches", JSON.stringify(savedSearches));
+        localStorage.setItem("currentTerm", searchThis);
         for (i = 0; i < 5; i++) {
             $('<option id="searchList" />').text(savedSearches[i]).appendTo('#searches');
         }
