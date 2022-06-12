@@ -448,7 +448,7 @@ var changeHeaderStyle = function(infoType){
     trovTitle.style.fontSize = "32px";
     menuBottom.style.marginLeft = "4px";
     searchDiv.style.display="flex";
-    searchLbl.textContent="Search "+infoType+": ";
+    // searchLbl.textContent="Search "+infoType+": ";
 }
 var searchFor = function(event){
     event.preventDefault();
