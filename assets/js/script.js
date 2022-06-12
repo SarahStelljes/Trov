@@ -29,6 +29,7 @@ var searchThis;
 var userSearched = false;
 var requestSearch="";
 var previousSearches = [];
+var requestUrl;
 
 // Fills array with local storage or gives empty array.
 var savedSearches = JSON.parse(localStorage.getItem("savedSearches")) || [];
@@ -45,16 +46,20 @@ var blogList = document.querySelector("#list-blogs");
 // get current media queries
 var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 var mediaQuery980 = 980;
+var mediaQuery575 = 575;
 
 console.log("Current Window width: "+width+"| mediaquery980 thing: "+mediaQuery980);
 
 var requestSpaceInfo = function(infoType){
     var currentTerm = localStorage.getItem("currentTerm");
+    console.log(infoType);
     if(userSearched){
+        console.log(requestUrl);
         requestSearch = "title_contains="+currentTerm+"&";
     }
-    console.log(infoType);
-    var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
+    else{
+        requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
+    }
     // disable prev button if page req is 0
     if(pageReq === 0){
         articlePrev.disabled=true;
@@ -77,12 +82,6 @@ var requestSpaceInfo = function(infoType){
                     // stringify data
                     var object = JSON.stringify(data[i]);
                     object = JSON.parse(object)
-                    
-                    if(previousSearches.length > 0){
-                        previousSearches.push(object.map(news => {
-                            return {title: news.title, summary: news.summary};
-                        }));
-                    }
 
                     // create article card
                     var articleCard = document.createElement("div");
@@ -125,8 +124,15 @@ var requestSpaceInfo = function(infoType){
                     var articleSum = document.createElement("p");
                     articleSum.className="article-summary";
                     var summARRY = object.summary;
-                    if(summARRY.length > 120){
-                        summARRY = summARRY.substring(119, 0) + "...";
+                    if(width <= mediaQuery575){
+                        if(summARRY.length > 20){
+                            summARRY = summARRY.substring(19, 0) + "...";
+                        }
+                    }
+                    else{
+                        if(summARRY.length > 120){
+                            summARRY = summARRY.substring(119, 0) + "...";
+                        }
                     }
                     articleSum.textContent=summARRY;
                     articleInfo.appendChild(articleSum);
@@ -459,8 +465,9 @@ var changeHeaderStyle = function(infoType){
 var searchFor = function(event){
     event.preventDefault();
     searchThis = searchInput.value;
+    searchThis = searchThis.replace(" ","_");
+    console.log("SEARCH THIS: "+ searchThis);
     if (searchThis === '') {
-        // alert('No Empty Searches');
         return;
     }
     // indexOf checks to see if it's in the array
@@ -473,13 +480,14 @@ var searchFor = function(event){
             $('<option id="searchList" />').text(savedSearches[i]).appendTo('#searches');
         }
     }
+    userSearched = true;
     requestSearch = "title_contains="+searchThis+"&";
-    var requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
-    fetch(requestUrl).then((res) => res.json()).then(function(data){
-        console.log(data);
-        userSearched = true;
-        saveSearch(searchThis);
-    });
+    requestUrl = 'https://api.spaceflightnewsapi.net/v3/'+type+'?'+requestSearch+'_start='+pageReq+'&_limit='+resultLimit;
+    // fetch(requestUrl).then((res) => res.json()).then(function(data){
+    //     console.log(data);
+    // });
+    removeCards();
+    saveSearch(searchThis);
 };
 var saveSearch = function(searchThis){
     if(previousSearches.length < 5){
@@ -493,23 +501,26 @@ var saveSearch = function(searchThis){
     }
 
 }
-// $(".card", function(){
-//     var cardType = $(this)
-//         .attr("id")
-//         .split("-")[0];
-//     return cardType;
-// })
-//     .children(cardType+"-info")
-//     .children("h3")
-//     .on("click", function(){
-//         // create object to push
-//         var openedNews = {
-//             url: $(requestUrl)
-//                 .split("?")[0],
-//             newsType: $(this)
-                
-//         };
-//     });
+
+var removeCards = function(){
+    if(type === "articles"){
+        while(articleList.firstChild){
+            articleList.removeChild(articleList.firstChild);
+        }
+    }
+    else if(type === "reports"){
+        while(reportList.firstChild){
+            reportList.removeChild(reportList.firstChild);
+        }
+    }
+    else if(type === "blogs"){
+        while(blogList.firstChild){
+            blogList.removeChild(blogList.firstChild);
+        }
+    }
+    requestSpaceInfo(type);
+}
+
 // article button event listeners
 var checkTime = function(){
     requestRandomSpaceImg();
