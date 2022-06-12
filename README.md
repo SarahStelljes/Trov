@@ -9,3 +9,7 @@ GIVEN a dashboard with form inputs
 WHEN I search for an article
 THEN I am presented with various articles that I can choose from to read
 WHEN I am choosing my article we have a stunning view of what is showing from the NASA Website
+
+Deployed Page: https://sarahstelljes.github.io/Trov/
+
+![Screenshot](./assets/images/screenshot.png)
