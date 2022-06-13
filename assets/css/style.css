@@ -5,7 +5,7 @@
   --footer: linear-gradient(#001c43, black);
 }
 .linker{
-
+  color: blue;
 }
 #menu-and-outline-holder{
   display: flex;

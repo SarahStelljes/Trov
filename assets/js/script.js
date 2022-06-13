@@ -101,16 +101,17 @@ var requestSpaceInfo = function(infoType){
                     
                     // create article info div and attach to article card
                     var articleInfo = document.createElement("div");
-                    articleInfo.className="article-info";
+                    articleInfo.className="article-info info";
                     articleCard.appendChild(articleInfo);
 
                     if(width <= mediaQuery980){
                         med980(object, articleCard, articleInfo);
                     }
                     
-                    var articleUrl = document.createElement("a");
-                    articleUrl.classList = "linker";
+                    var articleUrl = document.createElement("h4");
+                    articleUrl.className = "linker";
                     articleUrl.id = "art-link-"+object.id;
+                    articleUrl.setAttribute("url", object.url);
                     var artTitle = object.title;
                     if(artTitle.length > 50){
                         artTitle = artTitle.substring(49, 0)+"...";
@@ -162,47 +163,75 @@ var requestSpaceInfo = function(infoType){
 
                     // attach article card to article list
                     articleList.appendChild(articleCard);
+
+                    console.log(articleUrl);
+                    $("h4[url='"+object.url+"']").click(function(){
+                        console.log("Clicked worked at least");
+                        window.open(object.url, "_blank");
+                    });
                 }
             }
             if(infoType === "reports"){
-                for(var i = 0; i < data.length; i++){
-                    // stringify data
+                for(var i = 0; i < data.length; i++){// stringify data
                     var object = JSON.stringify(data[i]);
                     object = JSON.parse(object)
-            
+                    console.log(object);
                     // create report card
                     var reportCard = document.createElement("div");
                     reportCard.className="report-card card";
                     reportCard.setAttribute("url", data[i].url);
                     reportCard.id="report-"+object.id;
 
+                    var reportImgDiv = document.createElement("div");
+                    reportImgDiv.className="rep-div";
+                    reportCard.appendChild(reportImgDiv);
+
                     // create report image and attach it to report card
                     var reportImg = document.createElement("img");
                     reportImg.className="report-img";
                     reportImg.src = object.imageUrl;
-                    reportCard.appendChild(reportImg);
+                    reportImgDiv.appendChild(reportImg);
                     
                     // create report info div and attach to report card
                     var reportInfo = document.createElement("div");
                     reportInfo.className="report-info";
                     reportCard.appendChild(reportInfo);
-                    
-                    // create report title and attach it to report info div
-                    var reportTitle = document.createElement("h3");
-                    reportTitle.className="report-title";
-                    reportTitle.textContent=object.title;
-                    reportInfo.appendChild(reportTitle);
 
-                    // create report div
-                    var repDiv = document.createElement("div");
-                    repDiv.className = "report-div";
-                    reportInfo.appendChild(repDiv);
-                                        
+                    if(width <= mediaQuery980){
+                        med980(object, reportCard, reportInfo);
+                    }
+                    
+                    var reportUrl = document.createElement("h4");
+                    reportUrl.classList = "linker";
+                    reportUrl.id = "rep-link-"+object.id;
+                    reportUrl.setAttribute("url", object.url);
+                    var repTitle = object.title;
+                    if(repTitle.length > 50){
+                        repTitle = repTitle.substring(49, 0)+"...";
+                    }
+                    reportUrl.textContent = repTitle;
+                    reportUrl.href = object.url;
+                    console.log(reportUrl.innerText);
+                    console.log(reportUrl);
+
+                    reportInfo.appendChild(reportUrl);
+                    
                     // create report summary and attach to report info div
                     var reportSum = document.createElement("p");
                     reportSum.className="report-summary";
-                    reportSum.textContent=object.summary;
-                    repDiv.appendChild(reportSum);
+                    var summARRY = object.summary;
+                    if(width <= mediaQuery575){
+                        if(summARRY.length > 20){
+                            summARRY = summARRY.substring(19, 0) + "...";
+                        }
+                    }
+                    else{
+                        if(summARRY.length > 120){
+                            summARRY = summARRY.substring(119, 0) + "...";
+                        }
+                    }
+                    reportSum.textContent=summARRY;
+                    reportInfo.appendChild(reportSum);
 
                     // create published-info div
                     var pubDiv = document.createElement("div");
@@ -217,55 +246,83 @@ var requestSpaceInfo = function(infoType){
                     // published on
                     var pubOn = document.createElement("h4");
                     pubOn.className ="published-on";
-                    pubOn.textContent="Published On: "+object.publishedAt;
+                    var date = object.publishedAt;
+                    date = date.split("T")[0];
+                    pubOn.textContent="Published On: "+date;
                     pubDiv.appendChild(pubOn);
-            
+                    
                     // pub div attach to report card
-                    repDiv.appendChild(pubDiv);
+                    reportInfo.appendChild(pubDiv);
 
                     // attach report card to report list
                     reportList.appendChild(reportCard);
+
+                    $("h4[url='"+object.url+"']").click(function(){
+                        console.log("Clicked worked at least");
+                        window.open(object.url, "_blank");
+                    });
                 }
             }
             if(infoType === "blogs"){
-                for(var i = 0; i < data.length; i++){
-                    // stringify data
+                for(var i = 0; i < data.length; i++){// stringify data
                     var object = JSON.stringify(data[i]);
                     object = JSON.parse(object)
-            
+                    console.log(object);
                     // create blog card
                     var blogCard = document.createElement("div");
                     blogCard.className="blog-card card";
                     blogCard.setAttribute("url", data[i].url);
                     blogCard.id="blog-"+object.id;
 
+                    var blogImgDiv = document.createElement("div");
+                    blogImgDiv.className="blog-div";
+                    blogCard.appendChild(blogImgDiv);
+
                     // create blog image and attach it to blog card
                     var blogImg = document.createElement("img");
                     blogImg.className="blog-img";
                     blogImg.src = object.imageUrl;
-                    blogCard.appendChild(blogImg);
+                    blogImgDiv.appendChild(blogImg);
                     
                     // create blog info div and attach to blog card
                     var blogInfo = document.createElement("div");
                     blogInfo.className="blog-info";
                     blogCard.appendChild(blogInfo);
+
+                    if(width <= mediaQuery980){
+                        med980(object, blogCard, blogInfo);
+                    }
                     
-                    // create blog title and attach it to blog info div
-                    var blogTitle = document.createElement("h3");
-                    blogTitle.className="blog-title";
-                    blogTitle.textContent=object.title;
-                    blogInfo.appendChild(blogTitle);
+                    var blogUrl = document.createElement("h4");
+                    blogUrl.classList = "linker";
+                    blogUrl.id = "blog-link-"+object.id;
+                    blogUrl.setAttribute("url", object.url);
+                    var blogTitle = object.title;
+                    if(blogTitle.length > 50){
+                        blogTitle = blogTitle.substring(49, 0)+"...";
+                    }
+                    blogUrl.textContent = blogTitle;
+                    console.log(blogUrl.innerText);
+                    console.log(blogUrl);
+
+                    blogInfo.appendChild(blogUrl);
                     
-                    // create blog div
-                    var blogDiv = document.createElement("div");
-                    blogDiv.className = "blog-div";
-                    blogInfo.appendChild(blogDiv);
-                                        
                     // create blog summary and attach to blog info div
                     var blogSum = document.createElement("p");
                     blogSum.className="blog-summary";
-                    blogSum.textContent=object.summary;
-                    blogDiv.appendChild(blogSum);
+                    var summARRY = object.summary;
+                    if(width <= mediaQuery575){
+                        if(summARRY.length > 20){
+                            summARRY = summARRY.substring(19, 0) + "...";
+                        }
+                    }
+                    else{
+                        if(summARRY.length > 120){
+                            summARRY = summARRY.substring(119, 0) + "...";
+                        }
+                    }
+                    blogSum.textContent=summARRY;
+                    blogInfo.appendChild(blogSum);
 
                     // create published-info div
                     var pubDiv = document.createElement("div");
@@ -280,14 +337,21 @@ var requestSpaceInfo = function(infoType){
                     // published on
                     var pubOn = document.createElement("h4");
                     pubOn.className ="published-on";
-                    pubOn.textContent="Published On: "+object.publishedAt;
+                    var date = object.publishedAt;
+                    date = date.split("T")[0];
+                    pubOn.textContent="Published On: "+date;
                     pubDiv.appendChild(pubOn);
-            
+                    
                     // pub div attach to blog card
-                    blogDiv.appendChild(pubDiv);
+                    blogInfo.appendChild(pubDiv);
 
                     // attach blog card to blog list
                     blogList.appendChild(blogCard);
+                    
+                    $("h4[url='"+object.url+"']").click(function(){
+                        console.log("Clicked worked at least");
+                        window.open(object.url, "_blank");
+                    });
                 }
             }
         });
@@ -554,6 +618,10 @@ blogBtn.addEventListener("click", showBlogs);
 blogPrev.addEventListener("click", blogPrevPage);
 blogNext.addEventListener("click", blogNextPage);
 
+$(".card:last-child").children("h4").click(function(){
+    console.log("Thing clicked");
+    $(".card").chilren(".info").children("h4").attr("url", "_blank");
+})
 
 // other event listners
 searchBtn.addEventListener("click", searchFor);
