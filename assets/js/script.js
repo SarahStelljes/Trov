@@ -101,17 +101,17 @@ var requestSpaceInfo = function(infoType){
                     
                     // create article info div and attach to article card
                     var articleInfo = document.createElement("div");
-                    articleInfo.className="article-info info";
+                    articleInfo.className="article-info";
                     articleCard.appendChild(articleInfo);
 
                     if(width <= mediaQuery980){
                         med980(object, articleCard, articleInfo);
                     }
                     
-                    var articleUrl = document.createElement("h4");
-                    articleUrl.className = "linker";
+                    var articleUrl = document.createElement("a");
+                    articleUrl.classList = "linker";
                     articleUrl.id = "art-link-"+object.id;
-                    articleUrl.setAttribute("url", object.url);
+                    articleUrl.target = "_blank";
                     var artTitle = object.title;
                     if(artTitle.length > 50){
                         artTitle = artTitle.substring(49, 0)+"...";
@@ -163,12 +163,6 @@ var requestSpaceInfo = function(infoType){
 
                     // attach article card to article list
                     articleList.appendChild(articleCard);
-
-                    console.log(articleUrl);
-                    $("h4[url='"+object.url+"']").click(function(){
-                        console.log("Clicked worked at least");
-                        window.open(object.url, "_blank");
-                    });
                 }
             }
             if(infoType === "reports"){
@@ -201,10 +195,10 @@ var requestSpaceInfo = function(infoType){
                         med980(object, reportCard, reportInfo);
                     }
                     
-                    var reportUrl = document.createElement("h4");
+                    var reportUrl = document.createElement("a");
                     reportUrl.classList = "linker";
                     reportUrl.id = "rep-link-"+object.id;
-                    reportUrl.setAttribute("url", object.url);
+                    reportUrl.target = "_blank";
                     var repTitle = object.title;
                     if(repTitle.length > 50){
                         repTitle = repTitle.substring(49, 0)+"...";
@@ -256,11 +250,6 @@ var requestSpaceInfo = function(infoType){
 
                     // attach report card to report list
                     reportList.appendChild(reportCard);
-
-                    $("h4[url='"+object.url+"']").click(function(){
-                        console.log("Clicked worked at least");
-                        window.open(object.url, "_blank");
-                    });
                 }
             }
             if(infoType === "blogs"){
@@ -293,15 +282,16 @@ var requestSpaceInfo = function(infoType){
                         med980(object, blogCard, blogInfo);
                     }
                     
-                    var blogUrl = document.createElement("h4");
+                    var blogUrl = document.createElement("a");
                     blogUrl.classList = "linker";
                     blogUrl.id = "blog-link-"+object.id;
-                    blogUrl.setAttribute("url", object.url);
+                    blogUrl.target = "_blank";
                     var blogTitle = object.title;
                     if(blogTitle.length > 50){
                         blogTitle = blogTitle.substring(49, 0)+"...";
                     }
                     blogUrl.textContent = blogTitle;
+                    blogUrl.href = object.url;
                     console.log(blogUrl.innerText);
                     console.log(blogUrl);
 
@@ -347,11 +337,6 @@ var requestSpaceInfo = function(infoType){
 
                     // attach blog card to blog list
                     blogList.appendChild(blogCard);
-                    
-                    $("h4[url='"+object.url+"']").click(function(){
-                        console.log("Clicked worked at least");
-                        window.open(object.url, "_blank");
-                    });
                 }
             }
         });
@@ -618,10 +603,6 @@ blogBtn.addEventListener("click", showBlogs);
 blogPrev.addEventListener("click", blogPrevPage);
 blogNext.addEventListener("click", blogNextPage);
 
-$(".card:last-child").children("h4").click(function(){
-    console.log("Thing clicked");
-    $(".card").chilren(".info").children("h4").attr("url", "_blank");
-})
 
 // other event listners
 searchBtn.addEventListener("click", searchFor);
